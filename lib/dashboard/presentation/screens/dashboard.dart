@@ -11,8 +11,8 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final double gridWidth = 5;
-  final double gridHeight = 3;
+  final double gridWidth = 6;
+  final double gridHeight = 5;
 
   final double padding = 10;
   final double gridSpacing = 10;
@@ -43,20 +43,17 @@ class _DashboardState extends State<Dashboard> {
               return const Center(child: CircularProgressIndicator());
             case final DashboardGridLoaded state:
               final cardsData = state.cardsData;
-              return Padding(
-                padding: EdgeInsets.all(padding),
-                child: Stack(
-                  children: cardsData
-                      .map(
-                        (cardData) => CardWidget(
-                          card: cardData,
-                          scaleH: screenHeight / gridHeight,
-                          scaleW: screenWidth / gridWidth,
-                          padding: gridSpacing,
-                        ),
-                      )
-                      .toList(),
-                ),
+              return Stack(
+                children: cardsData
+                    .map(
+                      (cardData) => CardWidget(
+                        card: cardData,
+                        scaleH: screenHeight / gridHeight,
+                        scaleW: screenWidth / gridWidth,
+                        padding: gridSpacing,
+                      ),
+                    )
+                    .toList(),
               );
             case final DashboardGridError state:
               final errorMessage = state.message.message;
