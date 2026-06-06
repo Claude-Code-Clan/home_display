@@ -41,22 +41,22 @@ class WidgetPosition {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'xPos': xPos,
-      'yPos': yPos,
-      'width': width,
-      'height': height,
-      'type': type,
+      'widgetType': type,
+      'x': xPos,
+      'y': yPos,
+      'w': width,
+      'h': height,
     };
   }
 
   factory WidgetPosition.fromMap(Map<String, dynamic> map) {
     return WidgetPosition(
       id: map['id'] as int,
-      xPos: map['xPos'] as int,
-      yPos: map['yPos'] as int,
-      width: map['width'] as int,
-      height: map['height'] as int,
-      type: map['type'] as String,
+      xPos: map['x'] as int,
+      yPos: map['y'] as int,
+      width: map['w'] as int,
+      height: map['h'] as int,
+      type: map['widgetType'] as String,
     );
   }
 
@@ -67,7 +67,7 @@ class WidgetPosition {
 
   @override
   String toString() {
-    return 'CardData(id: $id, xPos: $xPos, yPos: $yPos, width: $width, height: $height, type: $type)';
+    return 'WidgetPosition(id: $id, xPos: $xPos, yPos: $yPos, width: $width, height: $height, type: $type)';
   }
 
   @override

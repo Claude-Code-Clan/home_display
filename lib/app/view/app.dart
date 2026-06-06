@@ -20,7 +20,7 @@ class App extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       home: BlocProvider(
         create: (context) =>
-            DashboardGridBloc(repository: DashboardMockRepository()),
+            DashboardGridBloc(repository: DashboardRepository()),
         child: const Dashboard(),
       ),
     );

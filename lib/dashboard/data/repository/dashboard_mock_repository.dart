@@ -112,8 +112,11 @@ final class DashboardMockRepository implements IDashboardRepository {
   }
 
   @override
-  Future<Map<int, WidgetsData>> getWidgetsData(Set<int> widgetIds) async {
+  Future<Map<int, WidgetsData>> getWidgetsData(
+    Map<int, WidgetPosition> widgetsPositions,
+  ) async {
     final data = <int, WidgetsData>{};
+    final widgetIds = widgetsPositions.keys.toSet();
 
     await Future.delayed(const Duration(seconds: 1));
 
