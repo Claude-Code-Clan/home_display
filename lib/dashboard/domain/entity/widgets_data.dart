@@ -73,3 +73,12 @@ final class NewsData extends WidgetsData {
   final List<String> images;
   final String type;
 }
+
+final class WeatherData extends WidgetsData {
+  WeatherData({
+    required super.id,
+    required this.temperature,
+  });
+
+  final double temperature;
+}

@@ -8,6 +8,7 @@ import 'package:home_display/information/presentation/components/information.dar
 import 'package:home_display/parking/presentation/components/parking_widget.dart';
 import 'package:home_display/rss_feed/presentation/components/rss_panel.dart';
 import 'package:home_display/storage/presentation/components/storage_widget.dart';
+import 'package:home_display/weather/presentation/components/weather_widget.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CardWidget extends StatefulWidget {
@@ -43,6 +44,8 @@ class _CardWidgetState extends State<CardWidget> {
         return ParkingWidget(data: data);
       case final StorageData data:
         return StorageWidget(data: data);
+      case final WeatherData data:
+        return WeatherWidget(data: data);
       default:
         return const SizedBox.shrink();
     }
