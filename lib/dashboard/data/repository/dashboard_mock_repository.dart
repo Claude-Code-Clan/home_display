@@ -135,7 +135,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         case 2:
           data[widgetId] = InformationData(
             id: widgetId,
-            markdownData: '''# Information Widget''',
+            markdownData: '''### Information Widget''',
           );
         default:
       }

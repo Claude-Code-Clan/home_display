@@ -35,13 +35,18 @@ class _HlsViewState extends State<HlsView> {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.cover,
-      child: SizedBox(
-        height: widget.height,
-        width: widget.width,
-        child: FlutterHLSVideoPlayer(
-          controller: flutterHLSVideoPlayerController,
+    return SizedBox(
+      width: widget.width,
+      height: widget.height,
+      child: ClipRect(
+        child: FittedBox(
+          fit: BoxFit.cover,
+          child: SizedBox(
+            width: widget.width,
+            child: FlutterHLSVideoPlayer(
+              controller: flutterHLSVideoPlayerController,
+            ),
+          ),
         ),
       ),
     );

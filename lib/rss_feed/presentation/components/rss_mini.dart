@@ -79,13 +79,14 @@ class RssMini extends StatelessWidget {
               if (item.description?.trim().isNotEmpty == true &&
                   imageUrl == null) ...[
                 const SizedBox(height: 4),
-                Text(
-                  item.description!,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
+                Expanded(
+                  child: Text(
+                    item.description!,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                    softWrap: true,
                   ),
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ],

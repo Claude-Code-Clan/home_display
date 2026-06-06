@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_display/core/helpers.dart';
 import 'package:home_display/rss_feed/data/repository/rss_feed_repository.dart';
 import 'package:home_display/rss_feed/domain/bloc/rss_feed_bloc.dart';
+import 'package:home_display/rss_feed/presentation/components/rss_base.dart';
 import 'package:home_display/rss_feed/presentation/components/rss_error_state.dart';
 import 'package:home_display/rss_feed/presentation/components/rss_mini.dart';
 import 'package:rss_feed/rss_feed.dart';
@@ -95,8 +97,15 @@ class _RssItemCardState extends State<_RssItemCard> {
       ),
       items: widget.items.map((i) {
         final imageUrl = FeedParser.getImageUrl(i);
-
-        return RssMini(item: i, width: widget.width, height: widget.height);
+        if (widget.height < 200 || widget.width < 200) {
+          return RssMini(item: i, width: widget.width, height: widget.height);
+        } else {
+          return RssBase(
+            height: widget.height,
+            width: widget.width,
+            item: i,
+          );
+        }
 
         return Container(
           margin: const EdgeInsets.symmetric(
@@ -147,9 +156,7 @@ class _RssItemCardState extends State<_RssItemCard> {
                     if (widget.height > 120 && widget.width > 120) ...[
                       const SizedBox(height: 6),
                       Text(
-                        i.pubDate?.trim().isNotEmpty == true
-                            ? i.pubDate!.trim()
-                            : 'No Date',
+                        parseRssDate(i.pubDate),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.bodySmall,
