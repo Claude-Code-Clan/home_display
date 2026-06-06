@@ -135,7 +135,17 @@ final class DashboardMockRepository implements IDashboardRepository {
         case 2:
           data[widgetId] = InformationData(
             id: widgetId,
-            markdownData: '''### Information Widget''',
+            markdownData: '''
+  ### Номер УК
+  > Путин запретил указывать номер управляющей компании в квитанциях на оплату ЖКУ
+
+  `
+    print('Я запрещаю вам срать в подъезде');
+  `
+  Lorem markdownum capillos tegi auribus erat limitibus grande requie, est tamen
+  *atque varios Insula* miserarum Pallas. Monte bracchia **crescendo** referri
+  velle.
+  ''',
           );
         default:
       }

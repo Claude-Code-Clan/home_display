@@ -9,8 +9,11 @@ class Information extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MarkdownWidget(
-      markdown: Markdown.fromString(markdownData),
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: MarkdownWidget(
+        markdown: Markdown.fromString(markdownData),
+      ),
     );
   }
 }
