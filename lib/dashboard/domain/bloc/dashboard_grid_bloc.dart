@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -12,12 +13,14 @@ part 'dashboard_grid_state.dart';
 
 class DashboardGridBloc extends Bloc<DashboardGridEvent, DashboardGridState> {
   final IDashboardRepository _repository;
+  Timer? _dataUpdateTimer;
 
   DashboardGridBloc({required IDashboardRepository repository})
     : _repository = repository,
       super(DashboardGridInitial()) {
     on<DashboardGridLoad>(_onLoadCards);
     on<DashboardDataLoad>(_onLoadData);
+    on<DashboardGridUpdate>(_onDashboardGridUpdate);
 
     add(DashboardGridLoad());
   }
@@ -32,6 +35,9 @@ class DashboardGridBloc extends Bloc<DashboardGridEvent, DashboardGridState> {
       emit(DashboardGridLoaded(widgetData: data));
 
       add(DashboardDataLoad(data.keys.toSet()));
+      _dataUpdateTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
+        add(DashboardGridUpdate());
+      });
     } catch (error, stackTrace) {
       log('Error loading cards: $error', stackTrace: stackTrace);
       emit(
@@ -50,7 +56,7 @@ class DashboardGridBloc extends Bloc<DashboardGridEvent, DashboardGridState> {
       final currentState = state;
       if (currentState is! DashboardGridLoaded) return;
 
-      final widgetIds = currentState.widgetData.keys.toSet();
+      currentState.widgetData.keys.toSet();
       final data = await _repository.getWidgetsData(currentState.widgetData);
 
       emit(
@@ -65,6 +71,35 @@ class DashboardGridBloc extends Bloc<DashboardGridEvent, DashboardGridState> {
         DashboardError(
           ErrorState(
             title: 'Failed to load card data',
+            message: error.toString(),
+          ),
+        ),
+      );
+    }
+  }
+
+  Future<void> _onDashboardGridUpdate(
+    DashboardGridUpdate event,
+    Emitter<DashboardGridState> emit,
+  ) async {
+    try {
+      final currentState = state;
+      if (currentState is! DashboardDataLoaded) return;
+
+      final data = await _repository.getWidgetsData(currentState.widgetData);
+
+      emit(
+        DashboardDataLoaded(
+          widgetData: currentState.widgetData,
+          widgetsData: data,
+        ),
+      );
+    } catch (error, stackTrace) {
+      log('Error updating card data: $error', stackTrace: stackTrace);
+      emit(
+        DashboardError(
+          ErrorState(
+            title: 'Failed to update card data',
             message: error.toString(),
           ),
         ),

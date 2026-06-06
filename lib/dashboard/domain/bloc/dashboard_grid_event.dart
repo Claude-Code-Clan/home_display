@@ -10,3 +10,7 @@ final class DashboardGridLoad extends DashboardGridEvent {
 final class DashboardDataLoad extends DashboardGridEvent {
   DashboardDataLoad(Set<int> widgetIds);
 }
+
+final class DashboardGridUpdate extends DashboardGridEvent {
+  DashboardGridUpdate();
+}
