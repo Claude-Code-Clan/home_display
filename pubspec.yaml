@@ -9,9 +9,11 @@ environment:
 
 dependencies:
   bloc: ^9.2.0
+  carousel_slider: ^5.1.2
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_hls_video_player: ^1.0.1
   flutter_localizations:
     sdk: flutter
   intl: ^0.20.2

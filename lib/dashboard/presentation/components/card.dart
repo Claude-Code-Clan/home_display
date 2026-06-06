@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:home_display/dashboard/domain/entity/card_data.dart';
-import 'package:home_display/rss_feed/view/widgets/rss_panel.dart';
+import 'package:home_display/rss_feed/presentation/components/rss_panel.dart';
 
 class CardWidget extends StatefulWidget {
   const CardWidget({
@@ -43,7 +43,9 @@ class _CardWidgetState extends State<CardWidget> {
                 widget.card.height.toDouble() * widget.scaleH -
                 2 * widget.padding,
             child: const Center(
-              child: RssPanel(),
+              child: RssPanel(
+                feedUrl: 'https://www.thehindu.com/feeder/default.rss',
+              ),
             ),
           ),
         ),

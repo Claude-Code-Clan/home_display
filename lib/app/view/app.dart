@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_display/dashboard/dashboard.dart';
 import 'package:home_display/dashboard/domain/bloc/dashboard_grid_bloc.dart';
-import 'package:home_display/rss_feed/rss_feed.dart';
 import 'package:home_display/l10n/l10n.dart';
 
 class App extends StatelessWidget {
