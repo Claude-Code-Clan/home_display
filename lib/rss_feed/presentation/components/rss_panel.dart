@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_display/core/helpers.dart';
 import 'package:home_display/rss_feed/data/repository/rss_feed_repository.dart';
 import 'package:home_display/rss_feed/domain/bloc/rss_feed_bloc.dart';
 import 'package:home_display/rss_feed/presentation/components/rss_base.dart';
@@ -86,8 +85,6 @@ class _RssItemCardState extends State<_RssItemCard> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return CarouselSlider(
       options: CarouselOptions(
         height: widget.height,
@@ -96,7 +93,7 @@ class _RssItemCardState extends State<_RssItemCard> {
         autoPlayInterval: const Duration(seconds: 5),
       ),
       items: widget.items.map((i) {
-        final imageUrl = FeedParser.getImageUrl(i);
+        FeedParser.getImageUrl(i);
         if (widget.height < 200 || widget.width < 200) {
           return RssMini(item: i, width: widget.width, height: widget.height);
         } else {
@@ -106,80 +103,6 @@ class _RssItemCardState extends State<_RssItemCard> {
             item: i,
           );
         }
-
-        return Container(
-          margin: const EdgeInsets.symmetric(
-            vertical: 4,
-            horizontal: 8,
-          ),
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: theme.cardColor.withAlpha(220),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (imageUrl != null) ...[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    imageUrl,
-                    width: 72,
-                    height: 72,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) {
-                      return const SizedBox(
-                        width: 72,
-                        height: 72,
-                        child: Icon(Icons.rss_feed),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(width: 12),
-              ],
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      i.title?.trim().isNotEmpty == true
-                          ? i.title!.trim()
-                          : 'No Title',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      style: theme.textTheme.titleMedium,
-                    ),
-                    if (widget.height > 120 && widget.width > 120) ...[
-                      const SizedBox(height: 6),
-                      Text(
-                        parseRssDate(i.pubDate),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ],
-                    if (i.description?.trim().isNotEmpty == true &&
-                        widget.height > 200 &&
-                        widget.width > 120) ...[
-                      const SizedBox(height: 8),
-                      Text(
-                        i.description!.trim(),
-                        maxLines: 4,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                        style: theme.textTheme.bodyMedium,
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
       }).toList(),
     );
   }

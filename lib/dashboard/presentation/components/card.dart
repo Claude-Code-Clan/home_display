@@ -5,6 +5,7 @@ import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
 import 'package:home_display/dashboard/domain/entity/widgets_data.dart';
 import 'package:home_display/hls/presentation/components/hls_view.dart';
 import 'package:home_display/information/presentation/components/information.dart';
+import 'package:home_display/parking/presentation/components/parking_widget.dart';
 import 'package:home_display/rss_feed/presentation/components/rss_panel.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -38,6 +39,8 @@ class _CardWidgetState extends State<CardWidget> {
 
       case final InformationData data:
         return Information(markdownData: data.markdownData);
+      case final ParkingSpotData data:
+        return ParkingWidget(data: data);
       default:
         return const SizedBox.shrink();
     }

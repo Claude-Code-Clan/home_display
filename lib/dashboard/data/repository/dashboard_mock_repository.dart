@@ -118,7 +118,7 @@ final class DashboardMockRepository implements IDashboardRepository {
     await Future.delayed(const Duration(seconds: 1));
 
     for (final widgetId in widgetIds) {
-      final rand = Random.secure().nextInt(3);
+      final rand = Random.secure().nextInt(4);
       switch (rand) {
         case 0:
           data[widgetId] = RssFeedData(
@@ -146,6 +146,14 @@ final class DashboardMockRepository implements IDashboardRepository {
   *atque varios Insula* miserarum Pallas. Monte bracchia **crescendo** referri
   velle.
   ''',
+          );
+        case 3:
+          data[widgetId] = ParkingSpotData(
+            id: widgetId,
+            freePublicSpots: Random.secure().nextInt(100),
+            totalPublicSpots: Random.secure().nextInt(100) + 100,
+            freePrivateSpots: Random.secure().nextInt(100),
+            totalPrivateSpots: Random.secure().nextInt(100) + 100,
           );
         default:
       }
