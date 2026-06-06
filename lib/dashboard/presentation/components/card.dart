@@ -31,7 +31,7 @@ class _CardWidgetState extends State<CardWidget> {
   Widget defineCardContent(double width, double height) {
     switch (widget.data) {
       case final RssFeedData data:
-        return RssPanel(feedUrl: data.feedUrl);
+        return RssPanel(feedUrl: data.feedUrl, height: height, width: width);
       case final HlsVideoData data:
         return HlsView(videoUrl: data.videoUrl, width: width, height: height);
       default:

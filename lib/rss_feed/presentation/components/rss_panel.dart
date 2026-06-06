@@ -8,11 +8,15 @@ import 'package:rss_feed/rss_feed.dart';
 
 class RssPanel extends StatefulWidget {
   const RssPanel({
+    required this.height,
+    required this.width,
     required this.feedUrl,
     this.initialItems = const [],
     super.key,
   });
 
+  final double height;
+  final double width;
   final String feedUrl;
   final List<RssItem> initialItems;
 
@@ -43,7 +47,11 @@ class _RssPanelState extends State<RssPanel> {
                     child: Text('No RSS items found'),
                   );
                 }
-                return _RssItemCard(items: items);
+                return _RssItemCard(
+                  items: items,
+                  height: widget.height,
+                  width: widget.width,
+                );
 
               case final RssFeedError state:
                 final error = state.error;
@@ -59,9 +67,13 @@ class _RssPanelState extends State<RssPanel> {
 class _RssItemCard extends StatefulWidget {
   const _RssItemCard({
     required this.items,
+    required this.height,
+    required this.width,
   });
 
   final List<RssItem> items;
+  final double height;
+  final double width;
 
   @override
   State<_RssItemCard> createState() => _RssItemCardState();
@@ -76,13 +88,14 @@ class _RssItemCardState extends State<_RssItemCard> {
 
     return CarouselSlider(
       options: CarouselOptions(
-        height: 1000,
+        height: widget.height,
         autoPlay: true,
         viewportFraction: 1,
         autoPlayInterval: const Duration(seconds: 5),
       ),
       items: widget.items.map((i) {
         final imageUrl = FeedParser.getImageUrl(i);
+
         return Container(
           margin: const EdgeInsets.symmetric(
             vertical: 4,
@@ -118,28 +131,37 @@ class _RssItemCardState extends State<_RssItemCard> {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       i.title?.trim().isNotEmpty == true
-                          ? i.title!
+                          ? i.title!.trim()
                           : 'No Title',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
+                      softWrap: true,
                       style: theme.textTheme.titleMedium,
                     ),
-                    const SizedBox(height: 6),
-                    Text(
-                      i.pubDate?.trim().isNotEmpty == true
-                          ? i.pubDate!
-                          : 'No Date',
-                      style: theme.textTheme.bodySmall,
-                    ),
-                    if (i.description?.trim().isNotEmpty == true) ...[
+                    if (widget.height > 120 && widget.width > 120) ...[
+                      const SizedBox(height: 6),
+                      Text(
+                        i.pubDate?.trim().isNotEmpty == true
+                            ? i.pubDate!.trim()
+                            : 'No Date',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ],
+                    if (i.description?.trim().isNotEmpty == true &&
+                        widget.height > 200 &&
+                        widget.width > 120) ...[
                       const SizedBox(height: 8),
                       Text(
-                        i.description ?? 'No Description',
-                        maxLines: 3,
+                        i.description!.trim(),
+                        maxLines: 4,
                         overflow: TextOverflow.ellipsis,
+                        softWrap: true,
                         style: theme.textTheme.bodyMedium,
                       ),
                     ],
