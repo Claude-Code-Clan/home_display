@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
 import 'package:home_display/dashboard/domain/entity/widgets_data.dart';
 import 'package:home_display/hls/presentation/components/hls_view.dart';
+import 'package:home_display/information/presentation/components/information.dart';
 import 'package:home_display/rss_feed/presentation/components/rss_panel.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -34,6 +35,9 @@ class _CardWidgetState extends State<CardWidget> {
         return RssPanel(feedUrl: data.feedUrl, height: height, width: width);
       case final HlsVideoData data:
         return HlsView(videoUrl: data.videoUrl, width: width, height: height);
+
+      case final InformationData data:
+        return Information(markdownData: data.markdownData);
       default:
         return const SizedBox.shrink();
     }

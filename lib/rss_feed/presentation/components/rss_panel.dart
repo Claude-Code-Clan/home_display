@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_display/rss_feed/data/repository/rss_feed_repository.dart';
 import 'package:home_display/rss_feed/domain/bloc/rss_feed_bloc.dart';
 import 'package:home_display/rss_feed/presentation/components/rss_error_state.dart';
+import 'package:home_display/rss_feed/presentation/components/rss_mini.dart';
 import 'package:rss_feed/rss_feed.dart';
 
 class RssPanel extends StatefulWidget {
@@ -29,8 +30,7 @@ class _RssPanelState extends State<RssPanel> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          RssFeedBloc(RssFeedRepository())
-            ..add(LoadRssFeed('https://rg.ru/xml/index.xml')),
+          RssFeedBloc(RssFeedRepository())..add(LoadRssFeed(widget.feedUrl)),
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300),
         child: BlocBuilder<RssFeedBloc, RssFeedState>(
@@ -95,6 +95,8 @@ class _RssItemCardState extends State<_RssItemCard> {
       ),
       items: widget.items.map((i) {
         final imageUrl = FeedParser.getImageUrl(i);
+
+        return RssMini(item: i, width: widget.width, height: widget.height);
 
         return Container(
           margin: const EdgeInsets.symmetric(

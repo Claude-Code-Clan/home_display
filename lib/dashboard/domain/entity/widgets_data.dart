@@ -15,3 +15,9 @@ final class HlsVideoData extends WidgetsData {
 
   final String videoUrl;
 }
+
+final class InformationData extends WidgetsData {
+  InformationData({required super.id, required this.markdownData});
+
+  final String markdownData;
+}

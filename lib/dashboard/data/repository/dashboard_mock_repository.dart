@@ -118,15 +118,27 @@ final class DashboardMockRepository implements IDashboardRepository {
     await Future.delayed(const Duration(seconds: 1));
 
     for (final widgetId in widgetIds) {
-      Random.secure().nextBool()
-          ? data[widgetId] = RssFeedData(
-              id: widgetId,
-              feedUrl: 'https://www.thehindu.com/feeder/default.rss',
-            )
-          : data[widgetId] = HlsVideoData(
-              id: widgetId,
-              videoUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-            );
+      final rand = Random.secure().nextInt(3);
+      switch (rand) {
+        case 0:
+          data[widgetId] = RssFeedData(
+            id: widgetId,
+            feedUrl: Random.secure().nextBool()
+                ? 'https://www.thehindu.com/feeder/default.rss'
+                : 'https://rg.ru/xml/index.xml',
+          );
+        case 1:
+          data[widgetId] = HlsVideoData(
+            id: widgetId,
+            videoUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+          );
+        case 2:
+          data[widgetId] = InformationData(
+            id: widgetId,
+            markdownData: '''# Information Widget''',
+          );
+        default:
+      }
     }
 
     return data;

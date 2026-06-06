@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:home_display/consts/consts.dart';
+import 'package:home_display/core/consts.dart';
 import 'package:home_display/dashboard/dashboard.dart';
 import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
 import 'package:home_display/dashboard/domain/entity/widgets_data.dart';
