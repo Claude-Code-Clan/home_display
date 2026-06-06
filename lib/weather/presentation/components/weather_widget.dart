@@ -65,15 +65,21 @@ class _WeatherWidgetState extends State<WeatherWidget> {
                   color: Theme.of(context).colorScheme.surface.withAlpha(200),
                   shape: BoxShape.circle,
                 ),
-                child: SvgPicture.network(
-                  weather?.icon ?? '',
-                  width: 48,
-                  height: 48,
-                  errorBuilder: (context, error, stackTrace) => const SizedBox(
-                    width: 48,
-                    height: 48,
-                  ),
-                ),
+                child: weather != null
+                    ? SvgPicture.network(
+                        weather?.icon ?? '',
+                        width: 48,
+                        height: 48,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const SizedBox(
+                              width: 48,
+                              height: 48,
+                            ),
+                      )
+                    : const SizedBox(
+                        width: 48,
+                        height: 48,
+                      ),
               ),
             ],
           ),

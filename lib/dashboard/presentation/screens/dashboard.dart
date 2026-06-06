@@ -22,18 +22,12 @@ class _DashboardState extends State<Dashboard> {
   late double screenWidth;
 
   @override
-  void initState() {
+  Widget build(BuildContext context) {
     final mediaQueryData = MediaQueryData.fromView(
       WidgetsBinding.instance.platformDispatcher.views.first,
     );
     screenHeight = mediaQueryData.size.height;
     screenWidth = mediaQueryData.size.width;
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(

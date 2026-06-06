@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:home_display/core/consts.dart';
 import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
 import 'package:home_display/dashboard/domain/entity/widgets_data.dart';
 import 'package:home_display/dashboard/domain/repository/i_dashboard_repository.dart';
-import 'package:home_display/weather/domain/entity/weather.dart';
 import 'package:http/http.dart' as http;
 
 /// {@template DashboardRepository}
@@ -80,7 +78,7 @@ final class DashboardRepository implements IDashboardRepository {
                 : 'https://rg.ru/xml/index.xml',
           );
 
-        case WidgetType.hls:
+        case WidgetType.camera:
           data[widgetId] = HlsVideoData(
             id: widgetId,
             videoUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
@@ -124,6 +122,18 @@ velle.
           data[widgetId] = WeatherData(
             id: widgetId,
             temperature: Random.secure().nextInt(500) / 10 - 25,
+          );
+        case WidgetType.news:
+          data[widgetId] = NewsData(
+            id: widgetId,
+            status: 2,
+            title: '',
+            text: '',
+            date: DateTime.now(),
+            expiresAt: DateTime.now().add(const Duration(days: 7)),
+            scheduledFor: DateTime.now(),
+            images: [],
+            type: '',
           );
       }
     }

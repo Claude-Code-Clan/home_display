@@ -11,11 +11,12 @@ final String hostUrl = dotenv.env['HOST_URL']!;
 
 enum WidgetType {
   rss(0),
-  hls(1),
+  camera(1),
   staticinfo(2),
   parking(3),
   storage(4),
-  weather(5)
+  weather(5),
+  news(6),
   ;
 
   const WidgetType(this.id);
