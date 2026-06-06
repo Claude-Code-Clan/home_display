@@ -5,8 +5,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-class Card {
-  Card({
+class CardData {
+  CardData({
     required this.xPos,
     required this.yPos,
     required this.width,
@@ -22,7 +22,7 @@ class Card {
   final String type;
   final Map<String, dynamic> data;
 
-  Card copyWith({
+  CardData copyWith({
     int? xPos,
     int? yPos,
     int? width,
@@ -30,7 +30,7 @@ class Card {
     String? type,
     Map<String, dynamic>? data,
   }) {
-    return Card(
+    return CardData(
       xPos: xPos ?? this.xPos,
       yPos: yPos ?? this.yPos,
       width: width ?? this.width,
@@ -51,8 +51,8 @@ class Card {
     };
   }
 
-  factory Card.fromMap(Map<String, dynamic> map) {
-    return Card(
+  factory CardData.fromMap(Map<String, dynamic> map) {
+    return CardData(
       xPos: map['xPos'] as int,
       yPos: map['yPos'] as int,
       width: map['width'] as int,
@@ -66,8 +66,8 @@ class Card {
 
   String toJson() => json.encode(toMap());
 
-  factory Card.fromJson(String source) =>
-      Card.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CardData.fromJson(String source) =>
+      CardData.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -76,7 +76,7 @@ class Card {
   }
 
   @override
-  bool operator ==(covariant Card other) {
+  bool operator ==(covariant CardData other) {
     if (identical(this, other)) return true;
 
     return other.xPos == xPos &&

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_display/dashboard/domain/bloc/dashboard_grid_bloc.dart';
+import 'package:home_display/dashboard/domain/entity/card_data.dart';
+import 'package:home_display/dashboard/presentation/components/card.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -25,11 +29,25 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          'Dashboard/n Screen Height: $screenHeight/n Screen Width: $screenWidth',
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
+      body: BlocBuilder<DashboardGridBloc, DashboardGridState>(
+        builder: (context, state) {
+          switch (state) {
+            case DashboardGridInitial _:
+              return const Center(child: Text('Initializing...'));
+            case DashboardGridLoading _:
+              return const Center(child: CircularProgressIndicator());
+            case final DashboardGridLoaded state:
+              final cardsData = state.cardsData;
+              return Stack(
+                children: cardsData
+                    .map((cardData) => CardWidget(card: cardData))
+                    .toList(),
+              );
+            case final DashboardGridError state:
+              final errorMessage = state.message.message;
+              return Center(child: Text('Error: $errorMessage'));
+          }
+        },
       ),
     );
   }
