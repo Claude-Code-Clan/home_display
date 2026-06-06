@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:home_display/dashboard/domain/entity/card_data.dart';
+import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
 import 'package:home_display/hls/presentation/components/hls_view.dart';
 import 'package:home_display/rss_feed/presentation/components/rss_panel.dart';
 
@@ -14,7 +14,7 @@ class CardWidget extends StatefulWidget {
     super.key,
   });
 
-  final CardData card;
+  final WidgetPosition card;
   final double scaleH;
   final double scaleW;
   final double padding;

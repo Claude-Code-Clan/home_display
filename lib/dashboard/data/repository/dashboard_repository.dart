@@ -1,4 +1,4 @@
-import 'package:home_display/dashboard/domain/entity/card_data.dart';
+import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
 
 import '../../domain/repository/i_dashboard_repository.dart';
 
@@ -7,7 +7,7 @@ import '../../domain/repository/i_dashboard_repository.dart';
 /// {@endtemplate}
 final class DashboardRepository implements IDashboardRepository {
   @override
-  Future<List<CardData>> getCardsData() async {
+  Future<List<WidgetPosition>> getWidgetsPosition() async {
     throw UnimplementedError();
   }
 }

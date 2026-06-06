@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:home_display/consts/consts.dart';
 import 'package:home_display/dashboard/dashboard.dart';
-import 'package:home_display/dashboard/domain/entity/card_data.dart';
+import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
 import 'package:meta/meta.dart';
 
 part 'dashboard_grid_event.dart';
@@ -26,7 +26,7 @@ class DashboardGridBloc extends Bloc<DashboardGridEvent, DashboardGridState> {
   ) async {
     try {
       emit(DashboardGridLoading());
-      final data = await _repository.getCardsData();
+      final data = await _repository.getWidgetsPosition();
       emit(DashboardGridLoaded(cardsData: data));
     } catch (error, stackTrace) {
       log('Error loading cards: $error', stackTrace: stackTrace);

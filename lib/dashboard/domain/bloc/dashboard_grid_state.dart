@@ -10,7 +10,7 @@ final class DashboardGridLoading extends DashboardGridState {}
 final class DashboardGridLoaded extends DashboardGridState {
   DashboardGridLoaded({required this.cardsData});
 
-  final List<CardData> cardsData;
+  final List<WidgetPosition> cardsData;
 }
 
 final class DashboardGridError extends DashboardGridState {

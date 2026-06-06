@@ -3,8 +3,8 @@
 
 import 'dart:convert';
 
-class CardData {
-  CardData({
+class WidgetPosition {
+  WidgetPosition({
     required this.id,
     required this.xPos,
     required this.yPos,
@@ -20,7 +20,7 @@ class CardData {
   final int height;
   final String type;
 
-  CardData copyWith({
+  WidgetPosition copyWith({
     int? id,
     int? xPos,
     int? yPos,
@@ -28,7 +28,7 @@ class CardData {
     int? height,
     String? type,
   }) {
-    return CardData(
+    return WidgetPosition(
       id: id ?? this.id,
       xPos: xPos ?? this.xPos,
       yPos: yPos ?? this.yPos,
@@ -49,8 +49,8 @@ class CardData {
     };
   }
 
-  factory CardData.fromMap(Map<String, dynamic> map) {
-    return CardData(
+  factory WidgetPosition.fromMap(Map<String, dynamic> map) {
+    return WidgetPosition(
       id: map['id'] as int,
       xPos: map['xPos'] as int,
       yPos: map['yPos'] as int,
@@ -62,8 +62,8 @@ class CardData {
 
   String toJson() => json.encode(toMap());
 
-  factory CardData.fromJson(String source) =>
-      CardData.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory WidgetPosition.fromJson(String source) =>
+      WidgetPosition.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -71,7 +71,7 @@ class CardData {
   }
 
   @override
-  bool operator ==(covariant CardData other) {
+  bool operator ==(covariant WidgetPosition other) {
     if (identical(this, other)) return true;
 
     return other.id == id &&
