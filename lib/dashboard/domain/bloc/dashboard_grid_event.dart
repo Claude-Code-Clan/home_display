@@ -4,7 +4,5 @@ part of 'dashboard_grid_bloc.dart';
 sealed class DashboardGridEvent {}
 
 final class DashboardGridLoad extends DashboardGridEvent {
-  DashboardGridLoad({required this.cardsData});
-
-  final List<CardData> cardsData;
+  DashboardGridLoad();
 }

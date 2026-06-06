@@ -16,6 +16,8 @@ class DashboardGridBloc extends Bloc<DashboardGridEvent, DashboardGridState> {
     : _repository = repository,
       super(DashboardGridInitial()) {
     on<DashboardGridLoad>(_onLoadCards);
+
+    add(DashboardGridLoad());
   }
 
   Future<void> _onLoadCards(

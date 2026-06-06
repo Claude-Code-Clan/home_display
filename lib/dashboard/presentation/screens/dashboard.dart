@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_display/dashboard/domain/bloc/dashboard_grid_bloc.dart';
-import 'package:home_display/dashboard/domain/entity/card_data.dart';
 import 'package:home_display/dashboard/presentation/components/card.dart';
 
 class Dashboard extends StatefulWidget {
@@ -12,6 +11,12 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final double gridWidth = 5;
+  final double gridHeight = 3;
+
+  final double padding = 10;
+  final double gridSpacing = 10;
+
   late double screenHeight;
   late double screenWidth;
 
@@ -38,10 +43,20 @@ class _DashboardState extends State<Dashboard> {
               return const Center(child: CircularProgressIndicator());
             case final DashboardGridLoaded state:
               final cardsData = state.cardsData;
-              return Stack(
-                children: cardsData
-                    .map((cardData) => CardWidget(card: cardData))
-                    .toList(),
+              return Padding(
+                padding: EdgeInsets.all(padding),
+                child: Stack(
+                  children: cardsData
+                      .map(
+                        (cardData) => CardWidget(
+                          card: cardData,
+                          scaleH: screenHeight / gridHeight,
+                          scaleW: screenWidth / gridWidth,
+                          padding: gridSpacing,
+                        ),
+                      )
+                      .toList(),
+                ),
               );
             case final DashboardGridError state:
               final errorMessage = state.message.message;
