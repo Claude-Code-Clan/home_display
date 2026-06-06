@@ -8,13 +8,20 @@ final class DashboardGridInitial extends DashboardGridState {}
 final class DashboardGridLoading extends DashboardGridState {}
 
 final class DashboardGridLoaded extends DashboardGridState {
-  DashboardGridLoaded({required this.cardsData});
+  DashboardGridLoaded({required this.widgetData});
 
-  final List<WidgetPosition> cardsData;
+  final Map<int, WidgetPosition> widgetData;
 }
 
-final class DashboardGridError extends DashboardGridState {
-  DashboardGridError(this.message);
+final class DashboardDataLoaded extends DashboardGridState {
+  DashboardDataLoaded({required this.widgetData, required this.widgetsData});
+
+  final Map<int, WidgetPosition> widgetData;
+  final Map<int, WidgetsData> widgetsData;
+}
+
+final class DashboardError extends DashboardGridState {
+  DashboardError(this.message);
 
   final ErrorState message;
 }

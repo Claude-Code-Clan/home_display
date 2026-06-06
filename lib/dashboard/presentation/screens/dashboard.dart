@@ -51,20 +51,36 @@ class _DashboardState extends State<Dashboard> {
               case DashboardGridLoading _:
                 return const Center(child: CircularProgressIndicator());
               case final DashboardGridLoaded state:
-                final cardsData = state.cardsData;
+                final cardsData = state.widgetData;
                 return Stack(
-                  children: cardsData
+                  children: cardsData.values
                       .map(
                         (cardData) => CardWidget(
                           card: cardData,
                           scaleH: screenHeight / gridHeight,
                           scaleW: screenWidth / gridWidth,
                           padding: gridSpacing,
+                          data: null,
                         ),
                       )
                       .toList(),
                 );
-              case final DashboardGridError state:
+              case final DashboardDataLoaded state:
+                final cardsData = state.widgetData;
+                return Stack(
+                  children: cardsData.values
+                      .map(
+                        (cardData) => CardWidget(
+                          card: cardData,
+                          scaleH: screenHeight / gridHeight,
+                          scaleW: screenWidth / gridWidth,
+                          padding: gridSpacing,
+                          data: state.widgetsData[cardData.id],
+                        ),
+                      )
+                      .toList(),
+                );
+              case final DashboardError state:
                 final errorMessage = state.message.message;
                 return Center(child: Text('Error: $errorMessage'));
             }

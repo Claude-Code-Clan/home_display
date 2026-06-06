@@ -1,8 +1,11 @@
 import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
+import 'package:home_display/dashboard/domain/entity/widgets_data.dart';
 
 /// {@template IDashboardRepository}
 ///
 /// {@endtemplate}
 abstract interface class IDashboardRepository {
-  Future<List<WidgetPosition>> getWidgetsPosition();
+  Future<Map<int, WidgetPosition>> getWidgetsPosition();
+
+  Future<Map<int, WidgetsData>> getWidgetsData(Set<int> widgetIds);
 }

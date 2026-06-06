@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
+import 'package:home_display/dashboard/domain/entity/widgets_data.dart';
 import 'package:home_display/dashboard/domain/repository/i_dashboard_repository.dart';
 
 /// {@template DashboardMockRepository}
@@ -6,10 +9,10 @@ import 'package:home_display/dashboard/domain/repository/i_dashboard_repository.
 /// {@endtemplate}
 final class DashboardMockRepository implements IDashboardRepository {
   @override
-  Future<List<WidgetPosition>> getWidgetsPosition() async {
+  Future<Map<int, WidgetPosition>> getWidgetsPosition() async {
     await Future.delayed(const Duration(seconds: 1));
-    return [
-      WidgetPosition(
+    return {
+      1: WidgetPosition(
         id: 1,
         xPos: 0,
         yPos: 0,
@@ -17,7 +20,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 2,
         type: 'example',
       ),
-      WidgetPosition(
+      2: WidgetPosition(
         id: 2,
         xPos: 0,
         yPos: 2,
@@ -25,7 +28,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 1,
         type: 'example',
       ),
-      WidgetPosition(
+      3: WidgetPosition(
         id: 3,
         xPos: 1,
         yPos: 2,
@@ -33,7 +36,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 1,
         type: 'example',
       ),
-      WidgetPosition(
+      4: WidgetPosition(
         id: 4,
         xPos: 2,
         yPos: 0,
@@ -41,7 +44,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 1,
         type: 'example',
       ),
-      WidgetPosition(
+      5: WidgetPosition(
         id: 5,
         xPos: 2,
         yPos: 1,
@@ -49,7 +52,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 2,
         type: 'example',
       ),
-      WidgetPosition(
+      6: WidgetPosition(
         id: 6,
         xPos: 3,
         yPos: 0,
@@ -57,7 +60,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 3,
         type: 'example',
       ),
-      WidgetPosition(
+      7: WidgetPosition(
         id: 7,
         xPos: 5,
         yPos: 0,
@@ -65,7 +68,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 1,
         type: 'example',
       ),
-      WidgetPosition(
+      8: WidgetPosition(
         id: 8,
         xPos: 5,
         yPos: 1,
@@ -73,7 +76,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 1,
         type: 'example',
       ),
-      WidgetPosition(
+      9: WidgetPosition(
         id: 9,
         xPos: 5,
         yPos: 2,
@@ -81,7 +84,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 1,
         type: 'example',
       ),
-      WidgetPosition(
+      10: WidgetPosition(
         id: 10,
         xPos: 5,
         yPos: 3,
@@ -89,7 +92,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 1,
         type: 'example',
       ),
-      WidgetPosition(
+      11: WidgetPosition(
         id: 11,
         xPos: 5,
         yPos: 4,
@@ -97,7 +100,7 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 1,
         type: 'example',
       ),
-      WidgetPosition(
+      12: WidgetPosition(
         id: 12,
         xPos: 0,
         yPos: 3,
@@ -105,6 +108,27 @@ final class DashboardMockRepository implements IDashboardRepository {
         height: 2,
         type: 'example',
       ),
-    ];
+    };
+  }
+
+  @override
+  Future<Map<int, WidgetsData>> getWidgetsData(Set<int> widgetIds) async {
+    final data = <int, WidgetsData>{};
+
+    await Future.delayed(const Duration(seconds: 1));
+
+    for (final widgetId in widgetIds) {
+      Random.secure().nextBool()
+          ? data[widgetId] = RssFeedData(
+              id: widgetId,
+              feedUrl: 'https://www.thehindu.com/feeder/default.rss',
+            )
+          : data[widgetId] = HlsVideoData(
+              id: widgetId,
+              videoUrl: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+            );
+    }
+
+    return data;
   }
 }
