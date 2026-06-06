@@ -118,7 +118,7 @@ final class DashboardMockRepository implements IDashboardRepository {
     await Future.delayed(const Duration(seconds: 1));
 
     for (final widgetId in widgetIds) {
-      final rand = Random.secure().nextInt(4);
+      final rand = Random.secure().nextInt(5);
       switch (rand) {
         case 0:
           data[widgetId] = RssFeedData(
@@ -154,6 +154,13 @@ final class DashboardMockRepository implements IDashboardRepository {
             totalPublicSpots: Random.secure().nextInt(100) + 100,
             freePrivateSpots: Random.secure().nextInt(100),
             totalPrivateSpots: Random.secure().nextInt(100) + 100,
+          );
+        case 4:
+          data[widgetId] = StorageData(
+            id: widgetId,
+            publicStorage: Random.secure().nextInt(100),
+            unassignedStorage: Random.secure().nextInt(100),
+            privateStorage: Random.secure().nextInt(100),
           );
         default:
       }

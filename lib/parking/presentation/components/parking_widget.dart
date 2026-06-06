@@ -50,7 +50,7 @@ class ParkingWidget extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
         ],
       ),
     );
