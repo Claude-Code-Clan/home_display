@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:home_display/core/consts.dart';
+import 'package:home_display/dashboard/domain/entity/alerts.dart';
 import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
 import 'package:home_display/dashboard/domain/entity/widgets_data.dart';
 import 'package:home_display/dashboard/domain/repository/i_dashboard_repository.dart';
@@ -139,5 +140,33 @@ velle.
     }
 
     return data;
+  }
+
+  @override
+  Future<Alerts> getAlerts() async {
+    final response = await _httpClient.post(
+      Uri.parse('$hostUrl/api/v1/Get/get-alerts'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'deviceIds': [1],
+      }),
+    );
+
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      throw Exception(
+        'Failed to get alerts: ${response.statusCode} ${response.body}',
+      );
+    }
+
+    final decoded = jsonDecode(response.body) as Map<String, dynamic>;
+    final alerts = decoded['alerts'] as List<dynamic>? ?? [];
+
+    if (alerts.isEmpty) {
+      return Alerts(id: 0, alert: '');
+    }
+
+    return Alerts.fromMap(alerts.first as Map<String, dynamic>);
   }
 }

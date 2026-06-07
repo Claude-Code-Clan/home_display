@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:home_display/dashboard/domain/entity/alerts.dart';
 import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
 import 'package:home_display/dashboard/domain/entity/widgets_data.dart';
 import 'package:home_display/dashboard/domain/repository/i_dashboard_repository.dart';
@@ -175,5 +176,10 @@ final class DashboardMockRepository implements IDashboardRepository {
     }
 
     return data;
+  }
+
+  Future<Alerts> getAlerts() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return Alerts(id: 1, alert: 'This is a sample alert.');
   }
 }

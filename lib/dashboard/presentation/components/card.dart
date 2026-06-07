@@ -68,13 +68,16 @@ class _CardWidgetState extends State<CardWidget> {
           child: Skeletonizer(
             enabled: widget.data == null,
             ignoreContainers: true,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).cardColor.withAlpha(128),
+            child: FittedBox(
+              fit: BoxFit.cover,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor.withAlpha(128),
+                ),
+                width: width,
+                height: height,
+                child: defineCardContent(width, height),
               ),
-              width: width,
-              height: height,
-              child: defineCardContent(width, height),
             ),
           ),
         ),

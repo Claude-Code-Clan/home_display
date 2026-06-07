@@ -1,3 +1,4 @@
+import 'package:home_display/dashboard/domain/entity/alerts.dart';
 import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
 import 'package:home_display/dashboard/domain/entity/widgets_data.dart';
 
@@ -10,4 +11,6 @@ abstract interface class IDashboardRepository {
   Future<Map<int, WidgetsData>> getWidgetsData(
     Map<int, WidgetPosition> widgetsPositions,
   );
+
+  Future<Alerts> getAlerts();
 }

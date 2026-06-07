@@ -23,11 +23,9 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQueryData = MediaQueryData.fromView(
-      WidgetsBinding.instance.platformDispatcher.views.first,
-    );
-    screenHeight = mediaQueryData.size.height;
-    screenWidth = mediaQueryData.size.width;
+    final mediaQueryData = MediaQuery.sizeOf(context);
+    screenHeight = mediaQueryData.height;
+    screenWidth = mediaQueryData.width;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -37,48 +35,89 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
 
-        child: BlocBuilder<DashboardGridBloc, DashboardGridState>(
-          builder: (context, state) {
-            switch (state) {
-              case DashboardGridInitial _:
-                return const Center(child: Text('Initializing...'));
-              case DashboardGridLoading _:
-                return const Center(child: CircularProgressIndicator());
-              case final DashboardGridLoaded state:
-                final cardsData = state.widgetData;
-                return Stack(
-                  children: cardsData.values
-                      .map(
-                        (cardData) => CardWidget(
-                          card: cardData,
-                          scaleH: screenHeight / gridHeight,
-                          scaleW: screenWidth / gridWidth,
-                          padding: gridSpacing,
-                          data: null,
-                        ),
-                      )
-                      .toList(),
-                );
-              case final DashboardDataLoaded state:
-                final cardsData = state.widgetData;
-                return Stack(
-                  children: cardsData.values
-                      .map(
-                        (cardData) => CardWidget(
-                          card: cardData,
-                          scaleH: screenHeight / gridHeight,
-                          scaleW: screenWidth / gridWidth,
-                          padding: gridSpacing,
-                          data: state.widgetsData[cardData.id],
-                        ),
-                      )
-                      .toList(),
-                );
-              case final DashboardError state:
-                final errorMessage = state.message.message;
-                return Center(child: Text('Error: $errorMessage'));
-            }
+        child: BlocListener<DashboardGridBloc, DashboardGridState>(
+          listenWhen: (previous, current) {
+            if (current is! DashboardDataLoaded) return false;
+
+            final previousAlert = previous is DashboardDataLoaded
+                ? previous.alerts?.alert
+                : null;
+
+            final currentAlert = current.alerts?.alert;
+
+            return previousAlert != currentAlert;
           },
+          listener: (context, state) {
+            if (state is! DashboardDataLoaded) return;
+
+            final messenger = ScaffoldMessenger.of(context);
+            final alert = state.alerts;
+
+            messenger.hideCurrentMaterialBanner();
+
+            if (alert == null) {
+              return;
+            }
+
+            messenger.showMaterialBanner(
+              MaterialBanner(
+                content: Text(alert.alert),
+                leading: const Icon(
+                  Icons.error,
+                  color: Colors.red,
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: messenger.hideCurrentMaterialBanner,
+                    child: const Text('ОК'),
+                  ),
+                ],
+              ),
+            );
+          },
+          child: BlocBuilder<DashboardGridBloc, DashboardGridState>(
+            builder: (context, state) {
+              switch (state) {
+                case DashboardGridInitial _:
+                  return const Center(child: Text('Initializing...'));
+                case DashboardGridLoading _:
+                  return const Center(child: CircularProgressIndicator());
+                case final DashboardGridLoaded state:
+                  final cardsData = state.widgetData;
+                  return Stack(
+                    children: cardsData.values
+                        .map(
+                          (cardData) => CardWidget(
+                            card: cardData,
+                            scaleH: screenHeight / gridHeight,
+                            scaleW: screenWidth / gridWidth,
+                            padding: gridSpacing,
+                            data: null,
+                          ),
+                        )
+                        .toList(),
+                  );
+                case final DashboardDataLoaded state:
+                  final cardsData = state.widgetData;
+                  return Stack(
+                    children: cardsData.values
+                        .map(
+                          (cardData) => CardWidget(
+                            card: cardData,
+                            scaleH: screenHeight / gridHeight,
+                            scaleW: screenWidth / gridWidth,
+                            padding: gridSpacing,
+                            data: state.widgetsData[cardData.id],
+                          ),
+                        )
+                        .toList(),
+                  );
+                case final DashboardError state:
+                  final errorMessage = state.message.message;
+                  return Center(child: Text('Error: $errorMessage'));
+              }
+            },
+          ),
         ),
       ),
     );

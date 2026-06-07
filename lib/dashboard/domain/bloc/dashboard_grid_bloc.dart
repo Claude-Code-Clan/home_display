@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:home_display/core/consts.dart';
 import 'package:home_display/dashboard/dashboard.dart';
+import 'package:home_display/dashboard/domain/entity/alerts.dart';
 import 'package:home_display/dashboard/domain/entity/widget_positions.dart';
 import 'package:home_display/dashboard/domain/entity/widgets_data.dart';
 import 'package:meta/meta.dart';
@@ -87,11 +88,13 @@ class DashboardGridBloc extends Bloc<DashboardGridEvent, DashboardGridState> {
       if (currentState is! DashboardDataLoaded) return;
 
       final data = await _repository.getWidgetsData(currentState.widgetData);
+      final alerts = await _repository.getAlerts();
 
       emit(
         DashboardDataLoaded(
           widgetData: currentState.widgetData,
           widgetsData: data,
+          alerts: alerts,
         ),
       );
     } catch (error, stackTrace) {

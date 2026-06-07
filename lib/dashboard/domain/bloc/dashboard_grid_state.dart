@@ -14,10 +14,15 @@ final class DashboardGridLoaded extends DashboardGridState {
 }
 
 final class DashboardDataLoaded extends DashboardGridState {
-  DashboardDataLoaded({required this.widgetData, required this.widgetsData});
+  DashboardDataLoaded({
+    required this.widgetData,
+    required this.widgetsData,
+    this.alerts,
+  });
 
   final Map<int, WidgetPosition> widgetData;
   final Map<int, WidgetsData> widgetsData;
+  final Alerts? alerts;
 }
 
 final class DashboardError extends DashboardGridState {
