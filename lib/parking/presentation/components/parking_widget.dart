@@ -9,20 +9,22 @@ class ParkingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(32),
       child: Column(
         crossAxisAlignment: .start,
         children: [
           Text(
-            'Общих парковок',
+            'Доступно парковочных мест на наземном паркинге',
             style: Theme.of(
               context,
-            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w400),
           ),
           RichText(
             text: TextSpan(
               text: data.freePublicSpots.toString(),
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(
+                context,
+              ).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w600),
               children: [
                 TextSpan(
                   text: ' / ${data.totalPublicSpots}',
@@ -35,15 +37,17 @@ class ParkingWidget extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            'Частных парковок',
+            'Зарезервированных парковочных мест',
             style: Theme.of(
               context,
-            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w400),
           ),
           RichText(
             text: TextSpan(
               text: data.freePrivateSpots.toString(),
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(
+                context,
+              ).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w600),
               children: [
                 TextSpan(
                   text: ' / ${data.totalPrivateSpots}',

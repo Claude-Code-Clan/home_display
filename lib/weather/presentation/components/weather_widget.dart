@@ -40,7 +40,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           Row(
@@ -48,7 +48,9 @@ class _WeatherWidgetState extends State<WeatherWidget> {
               RichText(
                 text: TextSpan(
                   text: '${weather?.temperature ?? '--'}°C',
-                  style: Theme.of(context).textTheme.displaySmall,
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                   children: [
                     TextSpan(
                       text: ' / ${weather?.fahrenheit ?? '--'}°F',
@@ -82,17 +84,17 @@ class _WeatherWidgetState extends State<WeatherWidget> {
                 child: weather != null
                     ? SvgPicture.network(
                         weather?.icon ?? '',
-                        width: 48,
-                        height: 48,
+                        width: 72,
+                        height: 72,
                         errorBuilder: (context, error, stackTrace) =>
                             const SizedBox(
-                              width: 48,
-                              height: 48,
+                              width: 72,
+                              height: 72,
                             ),
                       )
                     : const SizedBox(
-                        width: 48,
-                        height: 48,
+                        width: 72,
+                        height: 72,
                       ),
               ),
             ],

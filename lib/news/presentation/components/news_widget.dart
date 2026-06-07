@@ -29,26 +29,29 @@ class NewsWidget extends StatelessWidget {
             (i) => Container(
               width: width,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(16),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 32,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'data.articles[i].title',
+                      'Синицы',
                       style:
                           Theme.of(
                             context,
-                          ).textTheme.headlineSmall?.copyWith(
+                          ).textTheme.displaySmall?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 12),
                     Text(
                       '''
-data.articles[i].description
+Новости нашего двора. Синицы объелись забродившей рябины и гуляют по травке пошатываясь. Если бы синицы могли улыбаться, то они точно бы улыбались
 ''',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),

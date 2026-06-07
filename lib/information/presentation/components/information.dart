@@ -10,16 +10,14 @@ class Information extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(32),
       child: MarkdownTheme(
         data: MarkdownThemeData(
           textStyle: Theme.of(context).textTheme.bodyLarge!,
-          h1Style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-          h2Style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          h1Style: Theme.of(context).textTheme.headlineMedium?.copyWith(),
+          h2Style: Theme.of(
+            context,
+          ).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w600),
           quoteStyle: TextStyle(
             fontSize: 14,
             fontStyle: FontStyle.italic,

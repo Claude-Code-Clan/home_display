@@ -66,23 +66,18 @@ class _CardWidgetState extends State<CardWidget> {
       top: widget.card.yPos.toDouble() * widget.scaleH + widget.padding,
       child: ClipRRect(
         borderRadius: BorderRadiusGeometry.circular(16),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Skeletonizer(
-            enabled: widget.data == null,
-            ignoreContainers: true,
-            child: FittedBox(
-              fit: BoxFit.cover,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor.withAlpha(128),
-                ),
-                width: width,
-                height: height,
-                child: defineCardContent(width, height),
-              ),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: Theme.of(context).colorScheme.surfaceContainerHigh,
+              width: 1,
             ),
+            color: Theme.of(context).cardColor.withAlpha(128),
           ),
+          width: width,
+          height: height,
+          child: defineCardContent(width, height),
         ),
       ),
     );

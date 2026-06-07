@@ -9,43 +9,21 @@ class StorageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(32),
       child: Column(
         crossAxisAlignment: .start,
         children: [
           Text(
-            'Общих складов',
+            'Доступно кладовых',
             style: Theme.of(
               context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w400),
           ),
+          const Spacer(),
           Text(
             data.publicStorage.toString(),
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
-          const Spacer(),
-          Text(
-            'Частных складов',
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
-          ),
-          Text(
-            data.privateStorage.toString(),
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const Spacer(),
-          Text(
-            'Пустых складов',
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
-          ),
-          Text(
-            data.unassignedStorage.toString(),
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const Spacer(),
         ],
       ),
     );

@@ -19,7 +19,7 @@ class RssMini extends StatelessWidget {
     final imageUrl = FeedParser.getImageUrl(item);
 
     return Container(
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(32),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Theme.of(context).colorScheme.surface,
@@ -59,11 +59,11 @@ class RssMini extends StatelessWidget {
               ),
             ],
             Positioned(
-              left: 8,
-              right: 8,
-              top: imageUrl == null ? 8 : null,
+              left: 16,
+              right: 16,
+              top: imageUrl == null ? 16 : null,
               // bottom: imageUrl != null ? 8 : null,
-              bottom: 8,
+              bottom: 16,
               child: Column(
                 crossAxisAlignment: .start,
                 children: [
@@ -79,7 +79,6 @@ class RssMini extends StatelessWidget {
                     item.title ?? 'No title',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
-                      fontWeight: FontWeight.bold,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
