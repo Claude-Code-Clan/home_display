@@ -13,7 +13,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final double gridWidth = 6;
-  final double gridHeight = 5;
+  final double gridHeight = 5 * 2.3;
 
   final double padding = 10;
   final double gridSpacing = 8;
@@ -53,17 +53,16 @@ class _DashboardState extends State<Dashboard> {
 
           messenger.showMaterialBanner(
             MaterialBanner(
-              content: Text(alert.alert),
+              backgroundColor: Colors.red,
+              content: Text(
+                alert.alert,
+                style: const TextStyle(fontSize: 48, color: Colors.white),
+              ),
               leading: const Icon(
                 Icons.error,
-                // color: Colors.white,
+                color: Colors.white,
               ),
-              actions: [
-                TextButton(
-                  onPressed: messenger.hideCurrentMaterialBanner,
-                  child: const Text('ОК'),
-                ),
-              ],
+              actions: [SizedBox.shrink()],
             ),
           );
         },
