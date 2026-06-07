@@ -87,13 +87,14 @@ class DashboardGridBloc extends Bloc<DashboardGridEvent, DashboardGridState> {
       final currentState = state;
       if (currentState is! DashboardDataLoaded) return;
 
-      final data = await _repository.getWidgetsData(currentState.widgetData);
+      final data = await _repository.getWidgetsPosition();
+      final widgetsData = await _repository.getWidgetsData(data);
       final alerts = await _repository.getAlerts();
 
       emit(
         DashboardDataLoaded(
-          widgetData: currentState.widgetData,
-          widgetsData: data,
+          widgetData: data,
+          widgetsData: widgetsData,
           alerts: alerts,
         ),
       );

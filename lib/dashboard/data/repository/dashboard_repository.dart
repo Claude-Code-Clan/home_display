@@ -143,7 +143,7 @@ velle.
   }
 
   @override
-  Future<Alerts> getAlerts() async {
+  Future<Alerts?> getAlerts() async {
     final response = await _httpClient.post(
       Uri.parse('$hostUrl/api/v1/Get/get-alerts'),
       headers: {
@@ -163,9 +163,7 @@ velle.
     final decoded = jsonDecode(response.body) as Map<String, dynamic>;
     final alerts = decoded['alerts'] as List<dynamic>? ?? [];
 
-    if (alerts.isEmpty) {
-      return Alerts(id: 0, alert: '');
-    }
+    if (alerts.isEmpty) return null;
 
     return Alerts.fromMap(alerts.first as Map<String, dynamic>);
   }

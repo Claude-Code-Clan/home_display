@@ -12,5 +12,5 @@ abstract interface class IDashboardRepository {
     Map<int, WidgetPosition> widgetsPositions,
   );
 
-  Future<Alerts> getAlerts();
+  Future<Alerts?> getAlerts();
 }
