@@ -52,7 +52,7 @@ class RssBase extends StatelessWidget {
                 children: [
                   Text(
                     parseRssDate(item.pubDate),
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
                     maxLines: 1,
@@ -60,7 +60,7 @@ class RssBase extends StatelessWidget {
                   ),
                   Text(
                     item.title ?? 'No title',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
@@ -71,7 +71,7 @@ class RssBase extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       item.description!,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                       softWrap: true,

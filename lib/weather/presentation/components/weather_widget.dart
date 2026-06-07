@@ -48,7 +48,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
               RichText(
                 text: TextSpan(
                   text: '${weather?.temperature ?? '--'}°C',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context).textTheme.displaySmall,
                   children: [
                     TextSpan(
                       text: ' / ${weather?.fahrenheit ?? '--'}°F',
@@ -58,6 +58,20 @@ class _WeatherWidgetState extends State<WeatherWidget> {
                     ),
                   ],
                 ),
+              ),
+              const Spacer(),
+              Text(
+                '${weather?.humidity ?? 'N/A'}% 💧',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
+          ),
+          const Spacer(),
+          Row(
+            children: [
+              Text(
+                '${weather?.windSpeed ?? 'N/A'} mph 💨',
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
               Container(
@@ -80,20 +94,6 @@ class _WeatherWidgetState extends State<WeatherWidget> {
                         width: 48,
                         height: 48,
                       ),
-              ),
-            ],
-          ),
-          const Spacer(),
-          Row(
-            children: [
-              Text(
-                '${weather?.windSpeed ?? 'N/A'} mph 💨',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const Spacer(),
-              Text(
-                '${weather?.humidity ?? 'N/A'}% 💧',
-                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
           ),

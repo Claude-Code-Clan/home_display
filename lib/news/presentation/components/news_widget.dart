@@ -41,7 +41,7 @@ class NewsWidget extends StatelessWidget {
                       style:
                           Theme.of(
                             context,
-                          ).textTheme.titleMedium?.copyWith(
+                          ).textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
                     ),
@@ -50,7 +50,7 @@ class NewsWidget extends StatelessWidget {
                       '''
 data.articles[i].description
 ''',
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],
                 ),

@@ -17,7 +17,7 @@ class ParkingWidget extends StatelessWidget {
             'Общих парковок',
             style: Theme.of(
               context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
           ),
           RichText(
             text: TextSpan(
@@ -38,7 +38,7 @@ class ParkingWidget extends StatelessWidget {
             'Частных парковок',
             style: Theme.of(
               context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
           ),
           RichText(
             text: TextSpan(
