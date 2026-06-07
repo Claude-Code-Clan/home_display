@@ -15,7 +15,9 @@ class StorageWidget extends StatelessWidget {
         children: [
           Text(
             'Общих складов',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
           Text(
             data.publicStorage.toString(),
@@ -24,7 +26,9 @@ class StorageWidget extends StatelessWidget {
           const Spacer(),
           Text(
             'Частных складов',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
           Text(
             data.privateStorage.toString(),
@@ -33,7 +37,9 @@ class StorageWidget extends StatelessWidget {
           const Spacer(),
           Text(
             'Пустых складов',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
           Text(
             data.unassignedStorage.toString(),

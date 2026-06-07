@@ -89,34 +89,32 @@ final class DashboardRepository implements IDashboardRepository {
           data[widgetId] = InformationData(
             id: widgetId,
             markdownData: '''
-### Номер УК
-> Путин запретил указывать номер управляющей компании в квитанциях на оплату ЖКУ
+## СООБЩЕНИЕ
+о **проведении внеочередного общего собрания**
+собственников помещений в многоквартирном доме по адресу:
+*г. Москва, ул. Примерная, д. 1*
 
-`
-  print('Я запрещаю вам срать в подъезде');
-`
-
-Lorem markdownum capillos tegi auribus erat limitibus grande requie, est tamen
-*atque varios Insula* miserarum Pallas. Monte bracchia crescendo referri
-velle.
+Общее собрание созывается для принятия решений о проведении **капитального ремонта общего имущества*** в многоквартирном доме и привлечении для его финансирования кредита.
+Форма проведения общего собрания – очно-заочное голосование.
+Очное обсуждение вопросов повестки дня и принятие собственниками помещений решений по вопросам, поставленным на голосование, состоится 20 июня 2024 года в 19 часов по адресу: г. Москва, ул. Примерная, д. 1, подъезд 1, этаж 1, помещение 1.
 ''',
           );
 
         case WidgetType.parking:
           data[widgetId] = ParkingSpotData(
             id: widgetId,
-            freePublicSpots: Random.secure().nextInt(100),
-            totalPublicSpots: Random.secure().nextInt(100) + 100,
-            freePrivateSpots: Random.secure().nextInt(100),
-            totalPrivateSpots: Random.secure().nextInt(100) + 100,
+            freePublicSpots: 74,
+            totalPublicSpots: 126,
+            freePrivateSpots: 12,
+            totalPrivateSpots: 47,
           );
 
         case WidgetType.storage:
           data[widgetId] = StorageData(
             id: widgetId,
-            publicStorage: Random.secure().nextInt(100),
-            unassignedStorage: Random.secure().nextInt(100),
-            privateStorage: Random.secure().nextInt(100),
+            publicStorage: 17,
+            unassignedStorage: 5,
+            privateStorage: 7,
           );
 
         case WidgetType.weather:
@@ -128,8 +126,8 @@ velle.
           data[widgetId] = NewsData(
             id: widgetId,
             status: 2,
-            title: '',
-            text: '',
+            title: 'Test',
+            text: 'Testtstetsasfas',
             date: DateTime.now(),
             expiresAt: DateTime.now().add(const Duration(days: 7)),
             scheduledFor: DateTime.now(),

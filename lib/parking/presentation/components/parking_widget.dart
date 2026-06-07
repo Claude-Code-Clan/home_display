@@ -15,7 +15,9 @@ class ParkingWidget extends StatelessWidget {
         children: [
           Text(
             'Общих парковок',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
           RichText(
             text: TextSpan(
@@ -34,7 +36,9 @@ class ParkingWidget extends StatelessWidget {
           const Spacer(),
           Text(
             'Частных парковок',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
           RichText(
             text: TextSpan(
